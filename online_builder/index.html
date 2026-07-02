@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sheet-to-Anki Prototype</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <button id="menuToggle" class="icon-button" title="Thu gọn/mở menu" aria-label="Thu gọn/mở menu">
+            <span></span><span></span><span></span>
+          </button>
+          <div>
+            <strong>Sheet-to-Anki</strong>
+            <small>Kiểm tra Spreadsheet -> APKG</small>
+          </div>
+        </div>
+        <div class="top-actions">
+          <select id="reportSelect" class="select-control" aria-label="Nguồn hiện tại"></select>
+          <button id="refreshBtn" class="button secondary">Kiểm tra lại</button>
+          <button id="buildBtn" class="button primary" disabled>Build APKG</button>
+          <button id="aboutBtn" class="about-button" type="button" title="Thông tin phiên bản" aria-label="Thông tin phiên bản">!</button>
+        </div>
+      </header>
+
+      <aside class="sidebar">
+        <nav class="nav-group">
+          <a class="nav-item active" href="#source"><span class="nav-icon">S</span><span class="nav-label">Nguồn dữ liệu</span></a>
+          <a class="nav-item" href="#validate"><span class="nav-icon">V</span><span class="nav-label">Kiểm tra</span></a>
+          <a class="nav-item" href="#deck"><span class="nav-icon">D</span><span class="nav-label">Xem deck</span></a>
+          <a class="nav-item" href="#build"><span class="nav-icon">B</span><span class="nav-label">Build</span></a>
+          <a class="nav-item" href="#guide"><span class="nav-icon">H</span><span class="nav-label">Hướng dẫn</span></a>
+        </nav>
+        <div class="sidebar-card">
+          <div class="muted-label">Chế độ</div>
+          <div class="strong-line">Browser-only</div>
+          <p>Dữ liệu được xử lý ngay trên trình duyệt và không tải lên máy chủ.</p>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="source-strip" id="source">
+          <div>
+            <div class="muted-label">Nguồn hiện tại</div>
+            <h1 id="reportTitle">Đang tải...</h1>
+            <p id="reportDescription">Đang đọc report CP2.</p>
+          </div>
+          <div class="summary-grid" aria-label="Validation summary">
+            <div class="summary-cell">
+              <span id="sourceCount">0</span>
+              <small>Nguồn</small>
+            </div>
+            <div class="summary-cell">
+              <span id="rowCount">0</span>
+              <small>Dòng</small>
+            </div>
+            <div class="summary-cell danger">
+              <span id="blockerCount">0</span>
+              <small>Blocker</small>
+            </div>
+            <div class="summary-cell warning">
+              <span id="warningCount">0</span>
+              <small>Warning</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="process-panel">
+          <div class="process-step ok">
+            <span class="step-dot"></span>
+            <div>
+              <strong>Quét nguồn</strong>
+              <small id="scanStepText">Đã tải report CP2</small>
+            </div>
+          </div>
+          <div class="process-step ok">
+            <span class="step-dot"></span>
+            <div>
+              <strong>Nhận diện schema</strong>
+              <small>MCQ/Case theo thứ tự field</small>
+            </div>
+          </div>
+          <div id="validateStep" class="process-step">
+            <span class="step-dot"></span>
+            <div>
+              <strong>Kiểm tra</strong>
+              <small id="validateStepText">Đang kiểm tra</small>
+            </div>
+          </div>
+          <div id="buildStep" class="process-step locked">
+            <span class="step-dot"></span>
+            <div>
+              <strong>Build APKG</strong>
+              <small id="buildStepText">Chờ kiểm tra</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="local-source-panel">
+          <div class="panel-header">
+            <div>
+              <div class="muted-label">Nguồn dữ liệu thật</div>
+              <h2>Kiểm tra Google Sheet, CSV/XLSX</h2>
+            </div>
+          </div>
+          <div class="local-form">
+            <div class="source-row source-row-primary">
+              <label class="form-field">
+                <span>Loại nguồn</span>
+                <select id="localMode" class="select-control">
+                  <option value="google">Google Sheet công khai</option>
+                  <option value="xlsx">XLSX: mỗi sheet là một deck</option>
+                  <option value="csv">CSV: dùng deck path bên dưới</option>
+                </select>
+              </label>
+              <label class="form-field grow">
+                <span id="sourceInputLabel">Spreadsheet URL hoặc ID</span>
+                <textarea id="localPaths" rows="2" placeholder="https://docs.google.com/spreadsheets/d/..."></textarea>
+              </label>
+              <button id="validateLocalBtn" class="button primary source-action">Kiểm tra nguồn</button>
+            </div>
+            <div id="filePickerPanel" class="file-picker-panel" hidden>
+              <div id="fileDropZone" class="file-drop-zone" tabindex="0" role="button" aria-label="Chọn hoặc kéo thả file CSV XLSX">
+                <input id="sourceFileInput" type="file" multiple accept=".csv,.xlsx" hidden>
+                <div>
+                  <strong>Chọn file hoặc kéo thả vào đây</strong>
+                  <span id="fileDropHint">Hỗ trợ CSV/XLSX. Nếu đã chọn file, app sẽ upload tạm thời để kiểm tra.</span>
+                </div>
+                <button id="chooseFileBtn" type="button" class="button secondary">Chọn file</button>
+              </div>
+              <div id="selectedFileList" class="selected-file-list"></div>
+            </div>
+            <div id="sourceSecondaryRow" class="source-row source-row-secondary">
+              <label class="form-field" id="csvDeckField">
+                <span>Deck path cho CSV</span>
+                <input id="csvDeckPath" type="text" value="0 Nhi::Case" placeholder="0 Nhi::Case">
+              </label>
+              <label class="form-field" id="googleCredentialsField" hidden>
+                <span>OAuth JSON</span>
+                <input id="googleCredentialsPath" type="text" value="secrets/google_oauth_client.json" placeholder="secrets/google_oauth_client.json">
+              </label>
+              <label class="form-field grow" id="googleTabsField" hidden>
+                <span>Tab cần lấy, mỗi dòng một tab (bỏ trống = lấy tất cả)</span>
+                <textarea id="googleTabs" rows="2" placeholder="0 Nhi > Case&#10;0 Nhi > Hô hấp"></textarea>
+              </label>
+            </div>
+          </div>
+          <div id="localMessage" class="local-message">Dán link Google Sheet đã chia sẻ công khai hoặc chọn file CSV/XLSX.</div>
+        </section>
+
+        <section class="content-grid" id="validate">
+          <div class="table-panel">
+            <div class="panel-header">
+              <div>
+                <div class="muted-label">Bảng sheet/file</div>
+                <h2>Bảng kiểm tra</h2>
+              </div>
+              <div class="toolbar">
+                <button class="chip active" data-filter="all">Tất cả</button>
+                <button class="chip" data-filter="problem">Có lỗi</button>
+                <button class="chip" data-filter="ok">Hợp lệ</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="check-col"><input id="selectAll" type="checkbox" checked></th>
+                    <th>Sheet / File</th>
+                    <th>Deck</th>
+                    <th>Loại</th>
+                    <th>Dòng</th>
+                    <th>Approved</th>
+                    <th>Thẻ</th>
+                    <th>Blocker</th>
+                    <th>Warning</th>
+                    <th>Trạng thái</th>
+                  </tr>
+                </thead>
+                <tbody id="sourceTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <aside class="detail-panel">
+            <div class="panel-header compact">
+              <div>
+                <div class="muted-label">Chi tiết</div>
+                <h2 id="detailTitle">Chọn một sheet</h2>
+              </div>
+            </div>
+            <div id="detailBody" class="detail-body"></div>
+          </aside>
+        </section>
+
+        <section class="bottom-grid">
+          <div class="deck-panel" id="deck">
+            <div class="panel-header compact">
+              <div>
+                <div class="muted-label">Preview</div>
+                <h2>Cây deck</h2>
+              </div>
+            </div>
+            <div id="deckTree" class="deck-tree"></div>
+          </div>
+          <div class="issue-panel">
+            <div class="panel-header compact">
+              <div>
+                <div class="muted-label">Validation issues</div>
+                <h2>Danh sách lỗi</h2>
+              </div>
+              <button id="copyReportBtn" class="button secondary small">Copy tóm tắt</button>
+            </div>
+            <div id="issueList" class="issue-list"></div>
+          </div>
+        </section>
+
+        <section class="guide-panel" id="guide">
+          <div class="panel-header">
+            <div>
+              <div class="muted-label">Sổ tay</div>
+              <h2>Quy trình Sheet-to-Anki</h2>
+            </div>
+          </div>
+          <div class="guide-book">
+            <details open>
+              <summary>Bắt đầu nhanh</summary>
+              <ol>
+                <li>Mở Google Sheet và làm sạch dữ liệu trong từng tab deck.</li>
+                <li>Trong Sheet, chạy <strong>Anki Tools → Validate sheet hiện tại</strong>.</li>
+                <li>Sửa lỗi trong sidebar, bấm <strong>Reload</strong> cho đến khi hết lỗi cần sửa tay.</li>
+                <li>Quay lại web app, chọn <strong>Google Sheet: nguồn chính</strong>, nhập link Sheet và bấm <strong>Kiểm tra nguồn</strong>.</li>
+                <li>Mở nút <strong>!</strong> để kiểm version, số nguồn, số thẻ và ignored sources.</li>
+                <li>Nếu không có blocker, bấm <strong>Build APKG</strong>, rồi import vào Anki test trước.</li>
+              </ol>
+            </details>
+            <details>
+              <summary>Quy tắc đặt tab và deck</summary>
+              <ul>
+                <li>Tên tab là tên deck. Ví dụ: <code>0 Nhi &gt; Hô hấp</code> sẽ thành <code>0 Nhi::Hô hấp</code>.</li>
+                <li>Mỗi tab dữ liệu nên là một deck hoặc subdeck rõ ràng.</li>
+                <li><code>README</code>, <code>CONFIG</code>, <code>Anki Export</code>, <code>Anki Export Case</code> là tab phụ, không dùng để build trực tiếp.</li>
+                <li>Tab rác hoặc tab nháp như <code>Sheet2</code> sẽ bị bỏ qua nếu không đủ schema Anki hợp lệ.</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Quy tắc dữ liệu</summary>
+              <ul>
+                <li>Google Sheet chỉ được nhận nếu có đủ field MCQ hoặc Case và có cột <code>Status</code>.</li>
+                <li>Chỉ dòng có <code>Status = Approved</code> được đưa vào APKG.</li>
+                <li>CardUID nên nằm trong field <code>Source</code>, ví dụ <code>Mo Sheet - anki_...</code> hoặc <code>Mo Sheet - nhi_case_...</code>.</li>
+                <li>MCQ thường dùng field: <code>Ques, A, B, C, D, E, Ans, Ex, Source, Note, Image, Tags</code>.</li>
+                <li>MCQ Case dùng field: <code>CaseTitle, CaseStem</code>, nhóm <code>Ques1..Ques5</code>, đáp án, giải thích, rồi <code>Source, Note, Image, Tags</code>.</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Kiểm lỗi trong Google Sheet</summary>
+              <ul>
+                <li><strong>Quét sheet hiện tại</strong>: xem sheet này là MCQ hay Case, có bao nhiêu dòng Approved, thiếu CardUID hay không.</li>
+                <li><strong>Validate sheet hiện tại</strong>: mở sidebar lỗi, bấm từng lỗi để nhảy tới đúng ô.</li>
+                <li><strong>Tạo CardUID sheet hiện tại</strong>: chỉ ghi CardUID cho dòng Approved và không ghi đè CardUID đã có.</li>
+                <li>Sau khi sửa lỗi, bấm <strong>Reload</strong> trong sidebar để kiểm lại ngay.</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Build và import Anki</summary>
+              <ul>
+                <li>Trong web app, kiểm số nguồn và số thẻ trước khi build.</li>
+                <li>Nút <strong>!</strong> giúp kiểm frontend/backend version và danh sách source đang hiển thị.</li>
+                <li>Import APKG vào Anki test trước, xem thử MCQ thường, MCQ Case, ảnh Drive và mặt sau.</li>
+                <li>Khi mọi thứ ổn mới import vào deck chính.</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Lỗi thường gặp</summary>
+              <ul>
+                <li><strong>Sheet2 vẫn hiện</strong>: bấm <strong>!</strong> xem nó nằm trong sources hay ignored, rồi kiểm tab đó có đủ field Anki hay không.</li>
+                <li><strong>MISSING_CARD_UID</strong>: chạy <strong>Tạo CardUID sheet hiện tại</strong> trong Google Sheet.</li>
+                <li><strong>Thiếu Status</strong>: thêm cột <code>Status</code> và đặt dòng muốn build là <code>Approved</code>.</li>
+                <li><strong>Ảnh Drive không hiện</strong>: dùng link dạng <code>https://drive.google.com/uc?id=...</code> hoặc thẻ <code>&lt;img src="..."&gt;</code>.</li>
+                <li><strong>Dấu y khoa bị hiểu nhầm HTML</strong>: các dạng như <code>&lt;2cm</code>, <code>INR &gt; 1.5</code> sẽ được escape khi build APKG.</li>
+              </ul>
+            </details>
+            <details>
+              <summary>Làm nhiều tài liệu</summary>
+              <ul>
+                <li>Mỗi môn hoặc tài liệu lớn nên có một Spreadsheet riêng nếu nội dung khác nhau nhiều.</li>
+                <li>Mỗi tab là một deck nhỏ để dễ sửa, dễ tìm và dễ import lại.</li>
+                <li>Có thể build một APKG tổng từ nhiều tab hoặc build riêng từng nhóm tùy nhu cầu học.</li>
+              </ul>
+            </details>
+          </div>
+        </section>
+      </main>
+    </div>
+    <button id="versionPill" class="version-pill" type="button" title="Thông tin phiên bản">version...</button>
+    <div id="aboutPanel" class="about-panel" hidden>
+      <div class="about-card">
+        <div class="about-header">
+          <div>
+            <div class="muted-label">About</div>
+            <h2>Sheet-to-Anki</h2>
+          </div>
+          <button id="aboutCloseBtn" class="about-close" type="button" aria-label="Đóng">&times;</button>
+        </div>
+        <div id="aboutBody" class="about-body"></div>
+      </div>
+    </div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

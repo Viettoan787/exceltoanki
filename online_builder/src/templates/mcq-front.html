@@ -1,0 +1,309 @@
+<script>
+  if (localStorage.getItem('anki-theme-dark') === 'true') {
+    document.documentElement.classList.add('nightMode');
+  } else {
+    document.documentElement.classList.remove('nightMode');
+  }
+</script>
+
+<div id="myCard">
+  <div class="front">
+
+    <div class="topbar">
+      <div class="titlebar">
+        <div class="badge question-badge">Câu hỏi</div>
+      </div>
+    </div>
+
+    <div class="question-block">
+      <div class="question-text">{{Ques}}</div>
+    </div>
+
+    <form id="shuffle">
+      {{#A}}<div class="container" id="A"><input type="checkbox" name="radAnswer" class="checkbox" id="A"><div class="option">{{A}}</div></div>{{/A}}
+      {{#B}}<div class="container" id="B"><input type="checkbox" name="radAnswer" class="checkbox" id="B"><div class="option">{{B}}</div></div>{{/B}}
+      {{#C}}<div class="container" id="C"><input type="checkbox" name="radAnswer" class="checkbox" id="C"><div class="option">{{C}}</div></div>{{/C}}
+      {{#D}}<div class="container" id="D"><input type="checkbox" name="radAnswer" class="checkbox" id="D"><div class="option">{{D}}</div></div>{{/D}}
+      {{#E}}<div class="container" id="E"><input type="checkbox" name="radAnswer" class="checkbox" id="E"><div class="option">{{E}}</div></div>{{/E}}
+    </form>
+
+    {{#Tags}}
+    <div class="tag-footer front-tag">
+      🏷️ {{Tags}}
+    </div>
+    {{/Tags}}
+
+  </div>
+
+  <div id="settings">
+    <div id="gear">⚙️ Cài đặt hiển thị</div>
+    <div id="settings-content" style="display:none; margin-left:10px;">
+      <div id="zoom">
+        <span id="positive" style="cursor:pointer; padding:0 5px; font-weight:bold;">[+]</span>
+        <span id="default" style="cursor:pointer; padding:0 5px;">100%</span>
+        <span id="negative" style="cursor:pointer; padding:0 5px; font-weight:bold;">[-]</span>
+      </div>
+      <div class="check-box" style="margin-left:10px; border-left:1px solid #555; padding-left:10px;">
+        <label for="Shuffling">Trộn đáp án</label>
+        <input id="Shuffling" type="checkbox" style="margin-left:5px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-toolbar">
+  <div class="font-control-panel">
+    <button class="font-btn" id="font-minus" type="button">A−</button>
+    <button class="font-size-display" id="font-reset" type="button">17px</button>
+    <button class="font-btn" id="font-plus" type="button">A+</button>
+  </div>
+
+  <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle Theme">🌓</button>
+</div>
+
+<script>
+/* ===== Persistence (anki-persistence) ===== */
+if (void 0 === window.Persistence) {
+  var e = "github.com/SimonLammer/anki-persistence/", t = "_default";
+  if (window.Persistence_sessionStorage = function () {
+    var i = !1;
+    try {
+      "object" == typeof window.sessionStorage && (i = !0,
+        this.clear = function () { for (var t = 0; t < sessionStorage.length; t++) { var i = sessionStorage.key(t); 0 == i.indexOf(e) && (sessionStorage.removeItem(i), t--) } },
+        this.setItem = function (i, n) { void 0 == n && (n = i, i = t), sessionStorage.setItem(e + i, JSON.stringify(n)) },
+        this.getItem = function (i) { return void 0 == i && (i = t), JSON.parse(sessionStorage.getItem(e + i)) },
+        this.removeItem = function (i) { void 0 == i && (i = t), sessionStorage.removeItem(e + i) },
+        this.getAllKeys = function () { for (var t = [], i = Object.keys(sessionStorage), n = 0; n < i.length; n++) { var s = i[n]; 0 == s.indexOf(e) && t.push(s.substring(e.length, s.length)) } return t.sort() }
+      )
+    } catch (n) { }
+    this.isAvailable = function () { return i }
+  }, window.Persistence_windowKey = function (i) {
+    var n = window[i], s = !1;
+    "object" == typeof n && (s = !0,
+      this.clear = function () { n[e] = {} },
+      this.setItem = function (i, s) { void 0 == s && (s = i, i = t), n[e][i] = s },
+      this.getItem = function (i) { return void 0 == i && (i = t), void 0 == n[e][i] ? null : n[e][i] },
+      this.removeItem = function (i) { void 0 == i && (i = t), delete n[e][i] },
+      this.getAllKeys = function () { return Object.keys(n[e]) },
+      void 0 == n[e] && this.clear()
+    ), this.isAvailable = function () { return s }
+  }, window.Persistence = new Persistence_sessionStorage, Persistence.isAvailable() || (window.Persistence = new Persistence_windowKey("py")), !Persistence.isAvailable()) {
+    var i = window.location.toString().indexOf("title"), n = window.location.toString().indexOf("main", i);
+    i > 0 && n > 0 && n - i < 10 && (window.Persistence = new Persistence_windowKey("qt"))
+  }
+}
+
+/* ===== Helpers ===== */
+function qs(sel, root){ return (root || document).querySelector(sel); }
+function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+var myCard = qs("#myCard");
+var frontEl = qs(".front");
+var shuffleForm = qs("#shuffle");
+
+var X = "{{Ans}}";
+if (X && X === X.toLowerCase()) X = X.toUpperCase();
+
+/* reset per card */
+Persistence.setItem("answer", "");
+
+/* remove empty options (if any) */
+qsa(".option").forEach(function(opt){
+  if ((opt.textContent || "").trim() === "") {
+    var parent = opt.parentNode;
+    if (parent) parent.remove();
+  }
+});
+
+function applyZoom(){
+  if (Persistence.getItem("Zoom") == null) Persistence.setItem("Zoom", 1);
+  var zoom = Persistence.getItem("Zoom");
+  frontEl.style.zoom = zoom;
+}
+applyZoom();
+
+qs("#positive").addEventListener("click", function(){
+  var z = Persistence.getItem("Zoom") || 1;
+  z = Math.round((z + 0.1) * 10) / 10;
+  Persistence.setItem("Zoom", z);
+  frontEl.style.zoom = z;
+});
+qs("#default").addEventListener("click", function(){
+  Persistence.setItem("Zoom", 1);
+  frontEl.style.zoom = 1;
+});
+qs("#negative").addEventListener("click", function(){
+  var z = Persistence.getItem("Zoom") || 1;
+  z = Math.max(0.5, Math.round((z - 0.1) * 10) / 10);
+  Persistence.setItem("Zoom", z);
+  frontEl.style.zoom = z;
+});
+
+qs("#gear").addEventListener("click", function(){
+  var sc = qs("#settings-content");
+  sc.style.display = (sc.style.display === "none" || sc.style.display === "") ? "block" : "none";
+});
+
+/* ✅ iOS FIX: lưu scroll theo BODY */
+var __scroller = document.scrollingElement || document.documentElement;
+window.addEventListener("scroll", function(){
+  Persistence.setItem("scroll", __scroller.scrollTop || 0);
+}, { passive: true });
+
+function addLetters(){
+  qsa(".Letters", shuffleForm).forEach(function(l){ l.remove(); });
+  var containers = qsa(".container", shuffleForm);
+  containers.forEach(function(c, idx){
+    var opt = qs(".option", c);
+    if (!opt) return;
+    var sp = document.createElement("span");
+    sp.className = "Letters";
+    sp.textContent = String.fromCharCode(65 + idx) + ".";
+    opt.insertBefore(sp, opt.firstChild);
+  });
+}
+
+function storeAnswerBox(){
+  var ans = "";
+  qsa("input[type='checkbox']", shuffleForm).forEach(function(inp){
+    if (inp.checked) ans += inp.id;
+  });
+  Persistence.setItem("answer", ans);
+}
+
+function flipToBack(){
+  setTimeout(function(){
+    if (typeof pycmd !== "undefined") pycmd("ans");
+    else if (typeof study !== "undefined") study.drawAnswer();
+    else if (typeof AnkiDroidJS !== "undefined") showAnswer();
+  }, 50);
+}
+
+function toggleCheck(evt){
+  var cont = evt.currentTarget;
+  var cb = qs("input[type='checkbox']", cont);
+  if (!cb) return;
+  cb.checked = !cb.checked;
+  cont.classList.toggle("check", cb.checked);
+  storeAnswerBox();
+  flipToBack();
+}
+
+function shuffleNodes(nodeList){
+  var elems = Array.prototype.slice.call(nodeList);
+  var all = elems.slice();
+  var shuffled = [];
+  var l = all.length;
+  while (l--) {
+    var random = Math.floor(Math.random() * all.length);
+    var picked = all[random].cloneNode(true);
+    all.splice(random, 1);
+    shuffled.push(picked);
+    Persistence.setItem("order" + l, random);
+  }
+  elems.forEach(function(el){
+    el.parentNode.insertBefore(shuffled.pop(), el.nextSibling);
+    el.remove();
+  });
+}
+
+function reverseToDefault(){
+  var cur = qsa("#shuffle > .container");
+  var map = {};
+  cur.forEach(function(c){ map[c.id] = c.cloneNode(true); });
+  var order = ["A","B","C","D","E"].filter(function(k){ return map[k]; });
+  cur.forEach(function(c){ c.remove(); });
+  order.forEach(function(k){ shuffleForm.appendChild(map[k]); });
+}
+
+function handleShuffleToggle(){
+  var sh = qs("#Shuffling");
+  Persistence.setItem("ShufflingBox", !!sh.checked);
+  if (sh.checked) {
+    shuffleNodes(qsa("#shuffle > .container"));
+    addLetters();
+    bindEvents();
+  } else {
+    reverseToDefault();
+    addLetters();
+    bindEvents();
+  }
+}
+
+function bindEvents(){
+  qsa("#shuffle > .container").forEach(function(c){
+    c.removeEventListener("click", toggleCheck);
+    c.addEventListener("click", toggleCheck);
+  });
+}
+
+if (Persistence.getItem("ShufflingBox") == null) Persistence.setItem("ShufflingBox", false);
+qs("#Shuffling").checked = !!Persistence.getItem("ShufflingBox");
+
+addLetters();
+bindEvents();
+
+if (qs("#Shuffling").checked) {
+  shuffleNodes(qsa("#shuffle > .container"));
+  addLetters();
+  bindEvents();
+}
+
+qs("#Shuffling").addEventListener("click", handleShuffleToggle);
+
+/* ====== CHỈNH CỠ CHỮ + CHUYỂN ĐỔI SÁNG TỐI ====== */
+function applyUserFontSize(size) {
+  size = Math.max(12, Math.min(24, size));
+  document.documentElement.style.setProperty("--user-font-size", size + "px");
+  localStorage.setItem("anki-user-font-size", String(size));
+
+  var display = document.getElementById("font-reset");
+  if (display) display.textContent = size + "px";
+}
+
+function getCurrentFontSize() {
+  return parseInt(localStorage.getItem("anki-user-font-size") || "17", 10);
+}
+
+applyUserFontSize(getCurrentFontSize());
+
+var fontMinus = document.getElementById("font-minus");
+var fontPlus = document.getElementById("font-plus");
+var fontReset = document.getElementById("font-reset");
+
+if (fontMinus) {
+  fontMinus.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    applyUserFontSize(getCurrentFontSize() - 1);
+  });
+}
+
+if (fontPlus) {
+  fontPlus.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    applyUserFontSize(getCurrentFontSize() + 1);
+  });
+}
+
+if (fontReset) {
+  fontReset.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    applyUserFontSize(17);
+  });
+}
+
+var themeBtn = document.getElementById("theme-btn");
+if (themeBtn) {
+  themeBtn.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var isDark = document.documentElement.classList.toggle("nightMode");
+    localStorage.setItem("anki-theme-dark", isDark ? "true" : "false");
+  });
+}
+</script>
+
+{{AnkiAutoImageLinkRenderer}}

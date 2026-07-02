@@ -1,0 +1,210 @@
+<script>
+if (localStorage.getItem('anki-theme-dark') === 'true') {
+  document.documentElement.classList.add('nightMode');
+} else {
+  document.documentElement.classList.remove('nightMode');
+}
+</script>
+
+<div id="myCard">
+  <div class="front">
+
+    <div class="topbar">
+      <div class="titlebar">
+        <div class="badge question-badge">Case lâm sàng</div>
+      </div>
+    </div>
+
+    {{#CaseTitle}}
+    <div class="case-title">{{CaseTitle}}</div>
+    {{/CaseTitle}}
+
+    {{#CaseStem}}
+    <div class="case-stem">{{CaseStem}}</div>
+    {{/CaseStem}}
+
+    {{#Image}}
+    <div class="image-area">
+      {{Image}}
+    </div>
+    {{/Image}}
+
+    <form id="case-form">
+
+      {{#Ques1}}
+      <div class="case-question" data-q="1">
+        <div class="case-q-title">Câu 1. {{Ques1}}</div>
+        {{#A1}}<div class="container case-option" data-q="1" data-letter="A"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">A.</span>{{A1}}</div></div>{{/A1}}
+        {{#B1}}<div class="container case-option" data-q="1" data-letter="B"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">B.</span>{{B1}}</div></div>{{/B1}}
+        {{#C1}}<div class="container case-option" data-q="1" data-letter="C"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">C.</span>{{C1}}</div></div>{{/C1}}
+        {{#D1}}<div class="container case-option" data-q="1" data-letter="D"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">D.</span>{{D1}}</div></div>{{/D1}}
+      </div>
+      {{/Ques1}}
+
+      {{#Ques2}}
+      <div class="case-question" data-q="2">
+        <div class="case-q-title">Câu 2. {{Ques2}}</div>
+        {{#A2}}<div class="container case-option" data-q="2" data-letter="A"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">A.</span>{{A2}}</div></div>{{/A2}}
+        {{#B2}}<div class="container case-option" data-q="2" data-letter="B"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">B.</span>{{B2}}</div></div>{{/B2}}
+        {{#C2}}<div class="container case-option" data-q="2" data-letter="C"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">C.</span>{{C2}}</div></div>{{/C2}}
+        {{#D2}}<div class="container case-option" data-q="2" data-letter="D"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">D.</span>{{D2}}</div></div>{{/D2}}
+      </div>
+      {{/Ques2}}
+
+      {{#Ques3}}
+      <div class="case-question" data-q="3">
+        <div class="case-q-title">Câu 3. {{Ques3}}</div>
+        {{#A3}}<div class="container case-option" data-q="3" data-letter="A"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">A.</span>{{A3}}</div></div>{{/A3}}
+        {{#B3}}<div class="container case-option" data-q="3" data-letter="B"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">B.</span>{{B3}}</div></div>{{/B3}}
+        {{#C3}}<div class="container case-option" data-q="3" data-letter="C"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">C.</span>{{C3}}</div></div>{{/C3}}
+        {{#D3}}<div class="container case-option" data-q="3" data-letter="D"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">D.</span>{{D3}}</div></div>{{/D3}}
+      </div>
+      {{/Ques3}}
+
+      {{#Ques4}}
+      <div class="case-question" data-q="4">
+        <div class="case-q-title">Câu 4. {{Ques4}}</div>
+        {{#A4}}<div class="container case-option" data-q="4" data-letter="A"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">A.</span>{{A4}}</div></div>{{/A4}}
+        {{#B4}}<div class="container case-option" data-q="4" data-letter="B"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">B.</span>{{B4}}</div></div>{{/B4}}
+        {{#C4}}<div class="container case-option" data-q="4" data-letter="C"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">C.</span>{{C4}}</div></div>{{/C4}}
+        {{#D4}}<div class="container case-option" data-q="4" data-letter="D"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">D.</span>{{D4}}</div></div>{{/D4}}
+      </div>
+      {{/Ques4}}
+
+      {{#Ques5}}
+      <div class="case-question" data-q="5">
+        <div class="case-q-title">Câu 5. {{Ques5}}</div>
+        {{#A5}}<div class="container case-option" data-q="5" data-letter="A"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">A.</span>{{A5}}</div></div>{{/A5}}
+        {{#B5}}<div class="container case-option" data-q="5" data-letter="B"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">B.</span>{{B5}}</div></div>{{/B5}}
+        {{#C5}}<div class="container case-option" data-q="5" data-letter="C"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">C.</span>{{C5}}</div></div>{{/C5}}
+        {{#D5}}<div class="container case-option" data-q="5" data-letter="D"><input type="checkbox" class="checkbox"><div class="option"><span class="Letters">D.</span>{{D5}}</div></div>{{/D5}}
+      </div>
+      {{/Ques5}}
+
+    </form>
+
+    <button id="show-answer-btn" type="button">Xem đáp án</button>
+
+    {{#Tags}}
+    <div class="tag-footer front-tag">🏷️ {{Tags}}</div>
+    {{/Tags}}
+
+  </div>
+</div>
+
+<div class="card-toolbar">
+  <div class="font-control-panel">
+    <button class="font-btn" id="font-minus" type="button">A−</button>
+    <button class="font-size-display" id="font-reset" type="button">17px</button>
+    <button class="font-btn" id="font-plus" type="button">A+</button>
+  </div>
+
+  <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle Theme">🌓</button>
+</div>
+
+<script>
+if (void 0 === window.Persistence) {
+  var e = "github.com/SimonLammer/anki-persistence/", t = "_default";
+  window.Persistence_sessionStorage = function () {
+    var i = false;
+    try {
+      if (typeof window.sessionStorage === "object") {
+        i = true;
+        this.setItem = function (k, v) { if (v === undefined) { v = k; k = t; } sessionStorage.setItem(e + k, JSON.stringify(v)); };
+        this.getItem = function (k) { if (k === undefined) k = t; return JSON.parse(sessionStorage.getItem(e + k)); };
+        this.removeItem = function (k) { if (k === undefined) k = t; sessionStorage.removeItem(e + k); };
+      }
+    } catch (err) {}
+    this.isAvailable = function () { return i; };
+  };
+  window.Persistence = new Persistence_sessionStorage();
+}
+
+function qs(sel, root){ return (root || document).querySelector(sel); }
+function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+var answers = {};
+Persistence.setItem("caseAnswers", answers);
+
+qsa(".case-option").forEach(function(opt){
+  opt.addEventListener("click", function(){
+    var q = opt.getAttribute("data-q");
+    var letter = opt.getAttribute("data-letter");
+
+    qsa('.case-option[data-q="' + q + '"]').forEach(function(o){
+      o.classList.remove("check");
+      var cb = qs("input", o);
+      if (cb) cb.checked = false;
+    });
+
+    opt.classList.add("check");
+    var cb = qs("input", opt);
+    if (cb) cb.checked = true;
+
+    answers[q] = letter;
+    Persistence.setItem("caseAnswers", answers);
+  });
+});
+
+qs("#show-answer-btn").addEventListener("click", function(){
+  Persistence.setItem("caseAnswers", answers);
+
+  setTimeout(function(){
+    if (typeof pycmd !== "undefined") pycmd("ans");
+    else if (typeof study !== "undefined") study.drawAnswer();
+    else if (typeof AnkiDroidJS !== "undefined") showAnswer();
+  }, 50);
+});
+
+function applyUserFontSize(size) {
+  size = Math.max(12, Math.min(24, size));
+  document.documentElement.style.setProperty("--user-font-size", size + "px");
+  localStorage.setItem("anki-user-font-size", String(size));
+
+  var display = document.getElementById("font-reset");
+  if (display) display.textContent = size + "px";
+}
+
+function getCurrentFontSize() {
+  return parseInt(localStorage.getItem("anki-user-font-size") || "17", 10);
+}
+
+applyUserFontSize(getCurrentFontSize());
+
+var fontMinus = document.getElementById("font-minus");
+var fontPlus = document.getElementById("font-plus");
+var fontReset = document.getElementById("font-reset");
+
+if (fontMinus) {
+  fontMinus.addEventListener("click", function(e) {
+    e.stopPropagation();
+    applyUserFontSize(getCurrentFontSize() - 1);
+  });
+}
+
+if (fontPlus) {
+  fontPlus.addEventListener("click", function(e) {
+    e.stopPropagation();
+    applyUserFontSize(getCurrentFontSize() + 1);
+  });
+}
+
+if (fontReset) {
+  fontReset.addEventListener("click", function(e) {
+    e.stopPropagation();
+    applyUserFontSize(17);
+  });
+}
+
+var themeBtn = document.getElementById("theme-btn");
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var isDark = document.documentElement.classList.toggle("nightMode");
+    localStorage.setItem("anki-theme-dark", isDark ? "true" : "false");
+  });
+}
+</script>
+
+{{AnkiAutoImageLinkRenderer}}

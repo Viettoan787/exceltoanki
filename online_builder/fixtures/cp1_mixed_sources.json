@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "checkpoint": "CP12",
+  "sources": [
+    {
+      "name": "0 Nhi > Ho hap",
+      "kind": "googleSheetTab",
+      "case": "valid MCQ tab with Status",
+      "expectedDecision": "visible"
+    },
+    {
+      "name": "0 Nhi > Case cap cuu",
+      "kind": "googleSheetTab",
+      "case": "valid Case tab with Status",
+      "expectedDecision": "visible"
+    },
+    {
+      "name": "Sheet2",
+      "kind": "googleSheetTab",
+      "case": "draft tab with unknown headers",
+      "expectedDecision": "ignored"
+    },
+    {
+      "name": "README",
+      "kind": "googleSheetTab",
+      "case": "documentation tab",
+      "expectedDecision": "ignored"
+    },
+    {
+      "name": "0 Nhi > Missing Status",
+      "kind": "googleSheetTab",
+      "case": "full schema but no Status",
+      "expectedDecision": "blocker"
+    },
+    {
+      "name": "local_fixture.csv",
+      "kind": "csvFile",
+      "case": "full schema without Status",
+      "expectedDecision": "warning-only"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "version": "2.0.0",
+  "checkpoint": "CP12",
+  "visibleSources": [
+    {
+      "name": "0 Nhi > Ho hap",
+      "deckPath": "0 Nhi::Ho hap",
+      "schema": "normal"
+    },
+    {
+      "name": "0 Nhi > Case cap cuu",
+      "deckPath": "0 Nhi::Case cap cuu",
+      "schema": "case"
+    }
+  ],
+  "ignoredSources": [
+    {
+      "name": "Sheet2",
+      "reason": "unknown_or_draft_schema"
+    },
+    {
+      "name": "README",
+      "reason": "ignored_sheet_name"
+    }
+  ],
+  "warnings": [
+    {
+      "name": "local_fixture.csv",
+      "code": "MISSING_STATUS_CONFIRMATION_REQUIRED"
+    }
+  ],
+  "blockers": [
+    {
+      "name": "0 Nhi > Missing Status",
+      "code": "GOOGLE_SHEET_TAB_MISSING_STATUS"
+    }
+  ]
+}

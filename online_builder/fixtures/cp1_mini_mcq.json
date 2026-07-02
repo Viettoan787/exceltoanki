@@ -1,0 +1,58 @@
+{
+  "sourceName": "0 Nhi > Ho hap",
+  "sourceKind": "googleSheetTab",
+  "schema": "normal",
+  "headers": [
+    "Status",
+    "Ques",
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "Ans",
+    "Ex",
+    "Source",
+    "Note",
+    "Image",
+    "Tags"
+  ],
+  "rows": [
+    {
+      "Status": "Approved",
+      "Ques": "Which sign supports diagnosis A?",
+      "A": "Finding A",
+      "B": "Finding B",
+      "C": "Finding C",
+      "D": "Finding D",
+      "E": "Finding E",
+      "Ans": "A",
+      "Ex": "Short explanation with INR > 1.5 kept safe.",
+      "Source": "anki_10000001; fixture source",
+      "Note": "",
+      "Image": "",
+      "Tags": "cp12 fixture"
+    },
+    {
+      "Status": "Needs review",
+      "Ques": "This row should be filtered out by Status.",
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D",
+      "E": "E",
+      "Ans": "B",
+      "Ex": "",
+      "Source": "anki_10000002; fixture source",
+      "Note": "",
+      "Image": "",
+      "Tags": "cp12 fixture"
+    }
+  ],
+  "expected": {
+    "deckPath": "0 Nhi::Ho hap",
+    "visible": true,
+    "eligibleRows": 1,
+    "cardUIDs": ["anki_10000001"]
+  }
+}

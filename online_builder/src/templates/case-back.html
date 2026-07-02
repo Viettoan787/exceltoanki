@@ -1,0 +1,251 @@
+<script>
+if (localStorage.getItem('anki-theme-dark') === 'true') {
+  document.documentElement.classList.add('nightMode');
+} else {
+  document.documentElement.classList.remove('nightMode');
+}
+</script>
+
+<div id="myCard">
+  <div class="back">
+
+    <div class="topbar">
+      <div class="titlebar">
+        <div class="badge answer-badge">Đáp án Case</div>
+      </div>
+    </div>
+
+    {{#CaseTitle}}
+    <div class="case-title">{{CaseTitle}}</div>
+    {{/CaseTitle}}
+
+    {{#CaseStem}}
+    <div class="case-stem">{{CaseStem}}</div>
+    {{/CaseStem}}
+
+    {{#Image}}
+    <div class="image-area">
+      {{Image}}
+    </div>
+    {{/Image}}
+
+    <div id="case-result" class="case-result pending">
+      Đang kiểm tra kết quả...
+    </div>
+
+    <div id="case-review">
+
+      {{#Ques1}}
+      <div class="case-question review-question" data-q="1" data-ans="{{Ans1}}">
+        <div class="case-q-title">Câu 1. {{Ques1}}</div>
+        {{#A1}}<div class="container case-option" data-letter="A"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">A.</span>{{A1}}</div></div>{{/A1}}
+        {{#B1}}<div class="container case-option" data-letter="B"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">B.</span>{{B1}}</div></div>{{/B1}}
+        {{#C1}}<div class="container case-option" data-letter="C"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">C.</span>{{C1}}</div></div>{{/C1}}
+        {{#D1}}<div class="container case-option" data-letter="D"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">D.</span>{{D1}}</div></div>{{/D1}}
+        {{#Ex1}}<div class="case-explain">💡 {{Ex1}}</div>{{/Ex1}}
+      </div>
+      {{/Ques1}}
+
+      {{#Ques2}}
+      <div class="case-question review-question" data-q="2" data-ans="{{Ans2}}">
+        <div class="case-q-title">Câu 2. {{Ques2}}</div>
+        {{#A2}}<div class="container case-option" data-letter="A"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">A.</span>{{A2}}</div></div>{{/A2}}
+        {{#B2}}<div class="container case-option" data-letter="B"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">B.</span>{{B2}}</div></div>{{/B2}}
+        {{#C2}}<div class="container case-option" data-letter="C"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">C.</span>{{C2}}</div></div>{{/C2}}
+        {{#D2}}<div class="container case-option" data-letter="D"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">D.</span>{{D2}}</div></div>{{/D2}}
+        {{#Ex2}}<div class="case-explain">💡 {{Ex2}}</div>{{/Ex2}}
+      </div>
+      {{/Ques2}}
+
+      {{#Ques3}}
+      <div class="case-question review-question" data-q="3" data-ans="{{Ans3}}">
+        <div class="case-q-title">Câu 3. {{Ques3}}</div>
+        {{#A3}}<div class="container case-option" data-letter="A"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">A.</span>{{A3}}</div></div>{{/A3}}
+        {{#B3}}<div class="container case-option" data-letter="B"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">B.</span>{{B3}}</div></div>{{/B3}}
+        {{#C3}}<div class="container case-option" data-letter="C"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">C.</span>{{C3}}</div></div>{{/C3}}
+        {{#D3}}<div class="container case-option" data-letter="D"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">D.</span>{{D3}}</div></div>{{/D3}}
+        {{#Ex3}}<div class="case-explain">💡 {{Ex3}}</div>{{/Ex3}}
+      </div>
+      {{/Ques3}}
+
+      {{#Ques4}}
+      <div class="case-question review-question" data-q="4" data-ans="{{Ans4}}">
+        <div class="case-q-title">Câu 4. {{Ques4}}</div>
+        {{#A4}}<div class="container case-option" data-letter="A"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">A.</span>{{A4}}</div></div>{{/A4}}
+        {{#B4}}<div class="container case-option" data-letter="B"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">B.</span>{{B4}}</div></div>{{/B4}}
+        {{#C4}}<div class="container case-option" data-letter="C"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">C.</span>{{C4}}</div></div>{{/C4}}
+        {{#D4}}<div class="container case-option" data-letter="D"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">D.</span>{{D4}}</div></div>{{/D4}}
+        {{#Ex4}}<div class="case-explain">💡 {{Ex4}}</div>{{/Ex4}}
+      </div>
+      {{/Ques4}}
+
+      {{#Ques5}}
+      <div class="case-question review-question" data-q="5" data-ans="{{Ans5}}">
+        <div class="case-q-title">Câu 5. {{Ques5}}</div>
+        {{#A5}}<div class="container case-option" data-letter="A"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">A.</span>{{A5}}</div></div>{{/A5}}
+        {{#B5}}<div class="container case-option" data-letter="B"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">B.</span>{{B5}}</div></div>{{/B5}}
+        {{#C5}}<div class="container case-option" data-letter="C"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">C.</span>{{C5}}</div></div>{{/C5}}
+        {{#D5}}<div class="container case-option" data-letter="D"><input type="checkbox" class="checkbox" disabled><div class="option"><span class="Letters">D.</span>{{D5}}</div></div>{{/D5}}
+        {{#Ex5}}<div class="case-explain">💡 {{Ex5}}</div>{{/Ex5}}
+      </div>
+      {{/Ques5}}
+
+    </div>
+
+    {{#Note}}
+    <div id="note-section">
+      <div id="note-header" class="header-yellow">📝 MY NOTE</div>
+      <div id="note" class="content">{{Note}}</div>
+    </div>
+    {{/Note}}
+
+    {{#Source}}
+    <div class="source-footer">Nguồn: {{Source}}</div>
+    {{/Source}}
+
+    {{#Tags}}
+    <div class="tag-footer">🏷️ {{Tags}}</div>
+    {{/Tags}}
+
+  </div>
+</div>
+
+<div class="card-toolbar">
+  <div class="font-control-panel">
+    <button class="font-btn" id="font-minus" type="button">A−</button>
+    <button class="font-size-display" id="font-reset" type="button">17px</button>
+    <button class="font-btn" id="font-plus" type="button">A+</button>
+  </div>
+
+  <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle Theme">🌓</button>
+</div>
+
+<script>
+if (void 0 === window.Persistence) {
+  var e = "github.com/SimonLammer/anki-persistence/", t = "_default";
+  window.Persistence_sessionStorage = function () {
+    var i = false;
+    try {
+      if (typeof window.sessionStorage === "object") {
+        i = true;
+        this.setItem = function (k, v) { if (v === undefined) { v = k; k = t; } sessionStorage.setItem(e + k, JSON.stringify(v)); };
+        this.getItem = function (k) { if (k === undefined) k = t; return JSON.parse(sessionStorage.getItem(e + k)); };
+      }
+    } catch (err) {}
+    this.isAvailable = function () { return i; };
+  };
+  window.Persistence = new Persistence_sessionStorage();
+}
+
+function qs(sel, root){ return (root || document).querySelector(sel); }
+function qsa(sel, root){ return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+function norm(x) {
+  return String(x || "").trim().toUpperCase();
+}
+
+var answers = Persistence.getItem("caseAnswers") || {};
+var total = 0;
+var correctCount = 0;
+
+qsa(".review-question").forEach(function(qBlock){
+  var q = qBlock.getAttribute("data-q");
+  var correct = norm(qBlock.getAttribute("data-ans"));
+  var selected = norm(answers[q]);
+
+  if (!correct) return;
+
+  total += 1;
+
+  qsa(".case-option", qBlock).forEach(function(opt){
+    var letter = norm(opt.getAttribute("data-letter"));
+    var cb = qs("input", opt);
+
+    if (letter === selected && cb) cb.checked = true;
+
+    if (letter === correct) {
+      opt.classList.add("true");
+    }
+
+    if (letter === selected && selected !== correct) {
+      opt.classList.add("false-selection");
+    }
+  });
+
+  var status = document.createElement("div");
+  status.className = "case-mini-status";
+
+  if (selected === correct) {
+    correctCount += 1;
+    status.innerHTML = "✅ Bạn chọn: <b>" + selected + "</b> — Đúng";
+    status.classList.add("mini-right");
+  } else {
+    status.innerHTML = "❌ Bạn chọn: <b>" + (selected || "chưa chọn") + "</b> — Đáp án đúng: <b>" + correct + "</b>";
+    status.classList.add("mini-wrong");
+  }
+
+  qBlock.insertBefore(status, qBlock.children[1]);
+});
+
+var result = qs("#case-result");
+
+if (total > 0 && correctCount === total) {
+  result.className = "case-result case-pass";
+  result.innerHTML = "✅ ĐÚNG TOÀN BỘ CASE — " + correctCount + "/" + total;
+} else {
+  result.className = "case-result case-fail";
+  result.innerHTML = "❌ SAI CASE — 0 điểm. Đúng " + correctCount + "/" + total + ".";
+}
+
+function applyUserFontSize(size) {
+  size = Math.max(12, Math.min(24, size));
+  document.documentElement.style.setProperty("--user-font-size", size + "px");
+  localStorage.setItem("anki-user-font-size", String(size));
+
+  var display = document.getElementById("font-reset");
+  if (display) display.textContent = size + "px";
+}
+
+function getCurrentFontSize() {
+  return parseInt(localStorage.getItem("anki-user-font-size") || "17", 10);
+}
+
+applyUserFontSize(getCurrentFontSize());
+
+var fontMinus = document.getElementById("font-minus");
+var fontPlus = document.getElementById("font-plus");
+var fontReset = document.getElementById("font-reset");
+
+if (fontMinus) {
+  fontMinus.addEventListener("click", function(e) {
+    e.stopPropagation();
+    applyUserFontSize(getCurrentFontSize() - 1);
+  });
+}
+
+if (fontPlus) {
+  fontPlus.addEventListener("click", function(e) {
+    e.stopPropagation();
+    applyUserFontSize(getCurrentFontSize() + 1);
+  });
+}
+
+if (fontReset) {
+  fontReset.addEventListener("click", function(e) {
+    e.stopPropagation();
+    applyUserFontSize(17);
+  });
+}
+
+var themeBtn = document.getElementById("theme-btn");
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    var isDark = document.documentElement.classList.toggle("nightMode");
+    localStorage.setItem("anki-theme-dark", isDark ? "true" : "false");
+  });
+}
+</script>
+
+{{AnkiAutoImageLinkRenderer}}
