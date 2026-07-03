@@ -1284,3 +1284,6 @@ Next: CP3 Google Sheets OAuth/snapshot mapping.
 - [x] Push CP19 to GitHub.
 - [x] Deploy CP19 to Cloudflare Pages.
 - [x] Verify production and deployment URLs return HTTP 200.
+- [x] Create shorter Cloudflare Pages project `sheettoanki`.
+- [x] Deploy CP19 to `https://sheettoanki.pages.dev`.
+- [x] Verify new primary production and deployment URLs return HTTP 200.

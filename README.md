@@ -7,7 +7,8 @@ Current release:
 
 - Version: `v2.4.0`
 - Checkpoint: `CP19`
-- Hosted build: https://sheet-to-anki-online-builder.pages.dev
+- Hosted build: https://sheettoanki.pages.dev
+- Backup build: https://sheet-to-anki-online-builder.pages.dev
 
 Main app source:
 

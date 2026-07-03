@@ -48,7 +48,9 @@ Manual tester gate:
 Deployment evidence:
 
 - GitHub: `https://github.com/Viettoan787/exceltoanki`
-- Cloudflare Pages project: `sheet-to-anki-online-builder`
-- Production URL: `https://sheet-to-anki-online-builder.pages.dev`
-- Deployment URL: `https://6b19615b.sheet-to-anki-online-builder.pages.dev`
-- Production alias and deployment URL smoke checks returned HTTP 200.
+- Primary Cloudflare Pages project: `sheettoanki`
+- Primary production URL: `https://sheettoanki.pages.dev`
+- Primary deployment URL: `https://0a067a6c.sheettoanki.pages.dev`
+- Legacy backup project: `sheet-to-anki-online-builder`
+- Legacy backup URL: `https://sheet-to-anki-online-builder.pages.dev`
+- Primary production alias and deployment URL smoke checks returned HTTP 200.

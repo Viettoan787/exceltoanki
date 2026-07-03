@@ -82,7 +82,8 @@ Hay bao cao ngan gon:
 - CP19: local UI polish added, `v2.4.0`, contribution/contact page with Google
   Form and Facebook links.
 - Current checkpoint: CP19 accepted and deployed.
-- Production URL: `https://sheet-to-anki-online-builder.pages.dev`.
+- Production URL: `https://sheettoanki.pages.dev`.
+- Backup URL: `https://sheet-to-anki-online-builder.pages.dev`.
 
 ## CP19 scope - accepted and deployed
 
@@ -114,6 +115,11 @@ Hay bao cao ngan gon:
   - production URL: `https://sheet-to-anki-online-builder.pages.dev`;
   - deployment URL:
     `https://6b19615b.sheet-to-anki-online-builder.pages.dev`;
+  - production alias and deployment URL returned HTTP 200.
+- Short primary URL completed:
+  - project: `sheettoanki`;
+  - production URL: `https://sheettoanki.pages.dev`;
+  - deployment URL: `https://0a067a6c.sheettoanki.pages.dev`;
   - production alias and deployment URL returned HTTP 200.
 
 ## CP18 scope - local automated complete

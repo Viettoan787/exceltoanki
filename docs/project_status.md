@@ -1892,6 +1892,15 @@ Khong nen tiep tuc test bang `runs/nhi_y4y6/output/apkg/nhi_case.apkg` vi no dun
 - Cloudflare deployment URL:
   `https://6b19615b.sheet-to-anki-online-builder.pages.dev`
 - Production alias and deployment URL smoke checks both returned HTTP 200.
+- A shorter primary Cloudflare Pages project was created and deployed:
+  `sheettoanki`.
+- New primary production URL:
+  `https://sheettoanki.pages.dev`
+- New primary deployment URL:
+  `https://0a067a6c.sheettoanki.pages.dev`
+- The older `sheet-to-anki-online-builder.pages.dev` URL remains a backup.
+- New primary production alias and deployment URL smoke checks both returned
+  HTTP 200.
 
 ## CP3 real Google Sheet OAuth/list-tabs succeeded - 2026-07-02
 
