@@ -1849,6 +1849,42 @@ Khong nen tiep tuc test bang `runs/nhi_y4y6/output/apkg/nhi_case.apkg` vi no dun
   `https://c20f37d7.sheet-to-anki-online-builder.pages.dev`
 - Production alias smoke check returned HTTP 200.
 
+## CP18 online-builder Python regression guard - 2026-07-03
+
+- Advanced `online_builder/` to `v2.3.3 / CP18` for local regression coverage.
+- Added `online_builder/tests/cp18-python-regression.test.mjs`.
+- Added `npm run check:cp18` and included it in `npm test`.
+- CP18 compares browser/static APKG output against stable Python builder
+  invariants:
+  - same note/card count for the clean fixture set;
+  - same deck tree and deterministic deck IDs;
+  - same model IDs, model names and field order;
+  - JS CardUID GUIDs match Python `genanki.guid_for`;
+  - editing question text with the same CardUID keeps the same note GUID;
+  - APKG contains `collection.anki2` and `media`, and SQLite integrity is `ok`.
+- Documented CP18 in `online_builder/docs/CP18_PYTHON_REGRESSION.md`.
+- Verification passed in `online_builder/`: `npm run check:cp18`, `npm test`
+  and `npm run build`.
+- CP18 has not been deployed. Manual Anki smoke test is only needed if this
+  checkpoint is promoted beyond local QA.
+
+## CP19 online-builder contribution/contact page - 2026-07-03
+
+- Advanced `online_builder/` to `v2.4.0 / CP19` locally.
+- Updated displayed product name to `SheetToAnki`.
+- Added a sidebar `Đóng góp` item and contribution/contact section.
+- Added user-provided links:
+  - Google Form for feedback/bug reports/workflow suggestions;
+  - Facebook contact link.
+- Added user-provided optional coffee-support QR at
+  `online_builder/public/support-qr.png`.
+- The app remains browser-only: no hidden telemetry, no backend and no workbook
+  collection behavior was added.
+- Documented CP19 in `online_builder/docs/CP19_CONTRIBUTION_CONTACT.md`.
+- Verification passed in `online_builder/`: `npm test` and `npm run build`.
+- User manually accepted CP19 after checking the contribution/contact UI and QR.
+- CP19 is ready for GitHub/Cloudflare release.
+
 ## CP3 real Google Sheet OAuth/list-tabs succeeded - 2026-07-02
 
 - User created a Google OAuth Desktop client and saved it at

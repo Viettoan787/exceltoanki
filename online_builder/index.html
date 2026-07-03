@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sheet-to-Anki Prototype</title>
+    <title>SheetToAnki</title>
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
@@ -14,7 +14,7 @@
             <span></span><span></span><span></span>
           </button>
           <div>
-            <strong>Sheet-to-Anki</strong>
+            <strong>SheetToAnki</strong>
             <small>Kiểm tra Spreadsheet -> APKG</small>
           </div>
         </div>
@@ -33,6 +33,7 @@
           <a class="nav-item" href="#deck"><span class="nav-icon">D</span><span class="nav-label">Xem deck</span></a>
           <a class="nav-item" href="#build"><span class="nav-icon">B</span><span class="nav-label">Build</span></a>
           <a class="nav-item" href="#guide"><span class="nav-icon">H</span><span class="nav-label">Hướng dẫn</span></a>
+          <a class="nav-item" href="#contribute"><span class="nav-icon">G</span><span class="nav-label">Đóng góp</span></a>
         </nav>
         <div class="sidebar-card">
           <div class="muted-label">Chế độ</div>
@@ -294,6 +295,44 @@
             </details>
           </div>
         </section>
+
+        <section class="contribute-panel" id="contribute">
+          <div class="panel-header">
+            <div>
+              <div class="muted-label">Cộng đồng</div>
+              <h2>Đóng góp cho SheetToAnki</h2>
+            </div>
+          </div>
+          <div class="contribute-grid">
+            <div class="contribute-block">
+              <div class="contribute-icon">F</div>
+              <div>
+                <h3>Góp ý hoặc báo lỗi</h3>
+                <p>Gửi lỗi gặp phải, ảnh chụp màn hình, ý tưởng cải tiến hoặc đề xuất workflow qua Google Form.</p>
+                <a class="button primary link-button" href="https://docs.google.com/forms/d/e/1FAIpQLScB0jYl3RleT-mzcaOmddFXKglE6_A-uS4eYUJxZ2O0J1ntbQ/viewform?usp=publish-editor" target="_blank" rel="noopener noreferrer">Mở Google Form</a>
+              </div>
+            </div>
+            <div class="contribute-block">
+              <div class="contribute-icon">L</div>
+              <div>
+                <h3>Liên hệ trực tiếp</h3>
+                <p>Nếu cần trao đổi nhanh về SheetToAnki, bạn có thể nhắn qua Facebook cá nhân của mình.</p>
+                <a class="button secondary link-button" href="https://www.facebook.com/nvtylnbt" target="_blank" rel="noopener noreferrer">Mở Facebook</a>
+              </div>
+            </div>
+            <div class="contribute-block">
+              <div class="contribute-icon">C</div>
+              <div>
+                <h3>Ủng hộ ly cà phê</h3>
+                <p>SheetToAnki vẫn miễn phí. Nếu công cụ giúp bạn tiết kiệm thời gian tạo Anki, bạn có thể ủng hộ tự nguyện qua QR bên dưới.</p>
+                <figure class="support-qr">
+                  <img src="/support-qr.png" alt="QR ủng hộ Nguyễn Việt Toàn">
+                  <figcaption>Nguyễn Việt Toàn · STK kết thúc 145</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </div>
     <button id="versionPill" class="version-pill" type="button" title="Thông tin phiên bản">version...</button>
@@ -302,7 +341,7 @@
         <div class="about-header">
           <div>
             <div class="muted-label">About</div>
-            <h2>Sheet-to-Anki</h2>
+            <h2>SheetToAnki</h2>
           </div>
           <button id="aboutCloseBtn" class="about-close" type="button" aria-label="Đóng">&times;</button>
         </div>

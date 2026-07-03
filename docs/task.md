@@ -1251,3 +1251,33 @@ Next: CP3 Google Sheets OAuth/snapshot mapping.
 - [x] Deploy CP17 to Cloudflare Pages after explicit user confirmation.
 - [x] Verify production alias returns HTTP 200:
   `https://sheet-to-anki-online-builder.pages.dev`.
+
+## CP18 online-builder Python regression guard - 2026-07-03
+
+- [x] Add JS APKG regression check against stable Python builder invariants.
+- [x] Verify note/card count and deck tree.
+- [x] Verify deterministic deck IDs against Python `stable_int`.
+- [x] Verify model IDs, model names and field order.
+- [x] Verify JS CardUID GUIDs match Python `genanki.guid_for`.
+- [x] Verify editing content while keeping CardUID preserves note GUID.
+- [x] Inspect generated APKG for `collection.anki2`, `media` and SQLite
+  integrity `ok`.
+- [x] Add `npm run check:cp18`.
+- [x] Release online-builder metadata as `v2.3.3 / CP18`.
+- [x] Run `npm run check:cp18`, `npm test` and `npm run build` in
+  `online_builder/`.
+- [ ] User/Anki smoke test before CP18 deployment, only if promoting beyond
+  local QA.
+
+## CP19 online-builder contribution/contact page - 2026-07-03
+
+- [x] Rename displayed brand to `SheetToAnki`.
+- [x] Add sidebar `Đóng góp` item.
+- [x] Add contribution/contact page with Google Form link.
+- [x] Add Facebook contact link.
+- [x] Add optional coffee-support QR.
+- [x] Keep browser-only behavior; no hidden telemetry or workbook collection.
+- [x] Release local metadata as `v2.4.0 / CP19`.
+- [x] Run `npm test` and `npm run build` in `online_builder/`.
+- [x] User manual test: version, sidebar `Đóng góp`, Google Form, Facebook,
+  coffee-support QR, quick validate/build smoke path.

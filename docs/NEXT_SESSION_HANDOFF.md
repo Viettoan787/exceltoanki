@@ -23,13 +23,14 @@ Khong doi layout de sua loi loc nguon. Loi nhu Sheet2 xuat hien trong bang build
 la loi schema/status source-filtering, khong phai loi UI.
 
 Checkpoint hien tai:
-- CP17 local hardening da xong, user da test pass va da deploy Cloudflare Pages.
-- Current version: `v2.3.2`.
+- CP19 local contribution/contact UI da them.
+- Current version: `v2.4.0`.
 
 Viec can lam truoc khi code:
-- Neu tiep tuc code: bat dau CP18.
+- Neu tiep tuc code: hoan thien/test/deploy CP19 hoac bat dau checkpoint tiep
+  theo sau CP19.
 - Chua thay the workflow Python local.
-- CP17 da deploy sau khi user xac nhan.
+- CP17 da deploy sau khi user xac nhan; CP18/CP19 chua deploy.
 - Khong them research telemetry/collection neu chua co scope rieng va consent
   minh bach.
 
@@ -77,8 +78,56 @@ Hay bao cao ngan gon:
 - CP16: done, `v2.3.0` UI integration accepted.
 - CP17: done and accepted locally, `v2.3.2` release-hardening selection/build
   and Status gate fix.
-- Current checkpoint: CP17 accepted and deployed to Cloudflare Pages.
+- CP18: local automated regression guard added, `v2.3.3` Python compatibility
+  comparison for JS APKG invariants.
+- CP19: local UI polish added, `v2.4.0`, contribution/contact page with Google
+  Form and Facebook links.
+- Current checkpoint: CP19 local UI added; not deployed.
 - Production URL: `https://sheet-to-anki-online-builder.pages.dev`.
+
+## CP19 scope - local UI added
+
+- Updated displayed brand to `SheetToAnki`.
+- Added sidebar item and section `Đóng góp`.
+- Contribution section contains:
+  - Google Form feedback link:
+    `https://docs.google.com/forms/d/e/1FAIpQLScB0jYl3RleT-mzcaOmddFXKglE6_A-uS4eYUJxZ2O0J1ntbQ/viewform?usp=publish-editor`
+  - Facebook contact link:
+    `https://www.facebook.com/nvtylnbt`
+  - optional coffee-support QR at `online_builder/public/support-qr.png`.
+- No hidden telemetry, no workbook collection, no backend added.
+- Released local metadata: `v2.4.0 / CP19`;
+  status `contribution-contact-page`.
+- Verification passed locally:
+  - `npm test`;
+  - `npm run build`.
+- User has reported CP19 checkpoint acceptance.
+- Manual test needed before deploy:
+  - version shows `2.4.0 / CP19`;
+  - sidebar `Đóng góp` scrolls to the new section;
+  - Google Form/Facebook buttons open correctly;
+  - coffee-support QR is visible and scannable;
+  - quick validate/build smoke path still works.
+
+## CP18 scope - local automated complete
+
+- Added `online_builder/tests/cp18-python-regression.test.mjs`.
+- Added `npm run check:cp18` and included it in `npm test`.
+- CP18 compares the JS APKG path against stable Python builder invariants:
+  - note/card count;
+  - deck tree and deterministic deck IDs;
+  - model IDs, model names and field order;
+  - CardUID-derived GUIDs matching Python `genanki.guid_for`;
+  - unchanged GUID when question text changes but CardUID remains the same;
+  - APKG has `collection.anki2` and `media`, with SQLite integrity `ok`.
+- Released local metadata: `v2.3.3 / CP18`;
+  status `python-regression-guard`.
+- Verification passed locally:
+  - `npm run check:cp18`;
+  - `npm test`;
+  - `npm run build`.
+- Manual Anki import is only needed if promoting CP18 beyond local QA or before
+  deployment.
 
 ## CP17 scope - local complete
 

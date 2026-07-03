@@ -1,12 +1,12 @@
-# Sheet-to-Anki
+# SheetToAnki
 
-Browser-only Sheet-to-Anki builder for converting approved Google Sheet, CSV,
+Browser-only SheetToAnki builder for converting approved Google Sheet, CSV,
 or XLSX review tables into Anki APKG decks.
 
 Current release:
 
-- Version: `v2.3.2`
-- Checkpoint: `CP17`
+- Version: `v2.4.0`
+- Checkpoint: `CP19`
 - Hosted build: https://sheet-to-anki-online-builder.pages.dev
 
 Main app source:
@@ -28,5 +28,7 @@ Notes:
 - Public Google Sheet links work without OAuth when shared with viewer access.
 - Google Sheet tabs must include a `Status` column before they are accepted as
   buildable sources.
+- Feedback/contact lives in the in-app `Đóng góp` section through user-initiated
+  Google Form, Facebook and optional QR support links.
 - Private OAuth and research telemetry/collection are not part of the current
   release.

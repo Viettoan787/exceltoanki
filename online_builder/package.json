@@ -1,6 +1,6 @@
 {
   "name": "sheet-to-anki-online-builder",
-  "version": "2.3.2",
+  "version": "2.4.0",
   "private": true,
   "type": "module",
   "description": "Online/static sandbox for a future browser-only Sheet-to-Anki builder.",
@@ -10,7 +10,8 @@
     "preview": "vite preview --configLoader runner",
     "build:cp14-fixture": "node scripts/build-cp14-fixture-apkg.mjs",
     "check:cp15": "node tests/cp15-browser-pipeline.test.mjs",
-    "check": "node tests/cp12-contract-check.mjs && node tests/cp13-validate.test.mjs && node tests/cp14-build-plan.test.mjs && node tests/cp15-browser-pipeline.test.mjs",
+    "check:cp18": "node tests/cp18-python-regression.test.mjs",
+    "check": "node tests/cp12-contract-check.mjs && node tests/cp13-validate.test.mjs && node tests/cp14-build-plan.test.mjs && node tests/cp15-browser-pipeline.test.mjs && node tests/cp18-python-regression.test.mjs",
     "test": "npm run check"
   },
   "dependencies": {

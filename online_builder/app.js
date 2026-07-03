@@ -423,7 +423,7 @@ function escapeHtml(value) {
 
 function copySummary() {
   const summary = state.report.summary || {};
-  const line = `Sheet-to-Anki ${state.reports[state.reportKey]?.label}: ${summary.normalizedRows || 0} dòng, ${summary.blockers || 0} blocker, ${summary.warnings || 0} warning`;
+  const line = `SheetToAnki ${state.reports[state.reportKey]?.label}: ${summary.normalizedRows || 0} dòng, ${summary.blockers || 0} blocker, ${summary.warnings || 0} warning`;
   navigator.clipboard?.writeText(line);
 }
 

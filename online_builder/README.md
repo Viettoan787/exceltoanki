@@ -1,7 +1,7 @@
-# Sheet-to-Anki Online Builder Sandbox
+# SheetToAnki Online Builder Sandbox
 
-Version: `v2.3.2`
-Checkpoint: `CP17`
+Version: `v2.4.0`
+Checkpoint: `CP19`
 
 This folder is the isolated online/static builder line. The stable Python local
 workflow remains the production workflow and must not be modified to make this
@@ -103,7 +103,8 @@ Not included in CP16:
 
 ## Next Checkpoint
 
-CP17 is the current local release-hardening build as `v2.3.2`. It fixes selected
-source Build APKG behavior and treats Google Sheet tabs without `Status` as
-ignored sources instead of visible blockers. Deployment still requires explicit
-user confirmation.
+CP19 is the current local UI polish build as `v2.4.0`. It keeps the CP18 Python
+compatibility guard and adds a transparent contribution/contact page with Google
+Form and Facebook links.
+
+Deployment still requires explicit user confirmation.
