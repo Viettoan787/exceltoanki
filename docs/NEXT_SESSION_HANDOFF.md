@@ -23,14 +23,13 @@ Khong doi layout de sua loi loc nguon. Loi nhu Sheet2 xuat hien trong bang build
 la loi schema/status source-filtering, khong phai loi UI.
 
 Checkpoint hien tai:
-- CP19 local contribution/contact UI da them.
+- CP19 accepted and deployed.
 - Current version: `v2.4.0`.
 
 Viec can lam truoc khi code:
-- Neu tiep tuc code: hoan thien/test/deploy CP19 hoac bat dau checkpoint tiep
-  theo sau CP19.
+- Neu tiep tuc code: bat dau checkpoint tiep theo sau CP19.
 - Chua thay the workflow Python local.
-- CP17 da deploy sau khi user xac nhan; CP18/CP19 chua deploy.
+- CP19 da deploy sau khi user xac nhan.
 - Khong them research telemetry/collection neu chua co scope rieng va consent
   minh bach.
 
@@ -82,10 +81,10 @@ Hay bao cao ngan gon:
   comparison for JS APKG invariants.
 - CP19: local UI polish added, `v2.4.0`, contribution/contact page with Google
   Form and Facebook links.
-- Current checkpoint: CP19 local UI added; not deployed.
+- Current checkpoint: CP19 accepted and deployed.
 - Production URL: `https://sheet-to-anki-online-builder.pages.dev`.
 
-## CP19 scope - local UI added
+## CP19 scope - accepted and deployed
 
 - Updated displayed brand to `SheetToAnki`.
 - Added sidebar item and section `Đóng góp`.
@@ -102,12 +101,20 @@ Hay bao cao ngan gon:
   - `npm test`;
   - `npm run build`.
 - User has reported CP19 checkpoint acceptance.
-- Manual test needed before deploy:
+- Manual test passed before deploy:
   - version shows `2.4.0 / CP19`;
   - sidebar `Đóng góp` scrolls to the new section;
   - Google Form/Facebook buttons open correctly;
   - coffee-support QR is visible and scannable;
   - quick validate/build smoke path still works.
+- GitHub push completed:
+  `https://github.com/Viettoan787/exceltoanki`
+- Cloudflare Pages deployment completed:
+  - project: `sheet-to-anki-online-builder`;
+  - production URL: `https://sheet-to-anki-online-builder.pages.dev`;
+  - deployment URL:
+    `https://6b19615b.sheet-to-anki-online-builder.pages.dev`;
+  - production alias and deployment URL returned HTTP 200.
 
 ## CP18 scope - local automated complete
 

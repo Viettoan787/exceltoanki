@@ -1281,3 +1281,6 @@ Next: CP3 Google Sheets OAuth/snapshot mapping.
 - [x] Run `npm test` and `npm run build` in `online_builder/`.
 - [x] User manual test: version, sidebar `Đóng góp`, Google Form, Facebook,
   coffee-support QR, quick validate/build smoke path.
+- [x] Push CP19 to GitHub.
+- [x] Deploy CP19 to Cloudflare Pages.
+- [x] Verify production and deployment URLs return HTTP 200.

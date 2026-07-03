@@ -1883,7 +1883,15 @@ Khong nen tiep tuc test bang `runs/nhi_y4y6/output/apkg/nhi_case.apkg` vi no dun
 - Documented CP19 in `online_builder/docs/CP19_CONTRIBUTION_CONTACT.md`.
 - Verification passed in `online_builder/`: `npm test` and `npm run build`.
 - User manually accepted CP19 after checking the contribution/contact UI and QR.
-- CP19 is ready for GitHub/Cloudflare release.
+- CP19 was pushed to GitHub:
+  `https://github.com/Viettoan787/exceltoanki`
+- CP19 was deployed to Cloudflare Pages project
+  `sheet-to-anki-online-builder`.
+- Production URL:
+  `https://sheet-to-anki-online-builder.pages.dev`
+- Cloudflare deployment URL:
+  `https://6b19615b.sheet-to-anki-online-builder.pages.dev`
+- Production alias and deployment URL smoke checks both returned HTTP 200.
 
 ## CP3 real Google Sheet OAuth/list-tabs succeeded - 2026-07-02
 

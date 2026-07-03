@@ -1,7 +1,7 @@
 # CP19 Contribution And Contact Page
 
 Checkpoint: `CP19`
-Status: local UI added
+Status: accepted and deployed
 
 CP19 adds a transparent contribution/contact page to SheetToAnki. It does not
 change validation, APKG build logic, source filtering, OAuth or any data
@@ -44,3 +44,11 @@ Manual tester gate:
 - Confirm Google Form and Facebook buttons open the intended pages.
 - Confirm the coffee-support QR is visible and scannable.
 - Run one quick validate/build smoke path if CP19 is promoted for deploy.
+
+Deployment evidence:
+
+- GitHub: `https://github.com/Viettoan787/exceltoanki`
+- Cloudflare Pages project: `sheet-to-anki-online-builder`
+- Production URL: `https://sheet-to-anki-online-builder.pages.dev`
+- Deployment URL: `https://6b19615b.sheet-to-anki-online-builder.pages.dev`
+- Production alias and deployment URL smoke checks returned HTTP 200.
